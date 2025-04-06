@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://clc8c64loeoe2"]
+
+[ext_resource type="Script" path="res://drill.gd" id="1_r1gva"]
+[ext_resource type="Texture2D" uid="uid://g0443tcg38js" path="res://sprites/drill.png" id="2_3rrpo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mm26t"]
+size = Vector2(127, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vpuxf"]
+size = Vector2(127, 88)
+
+[node name="Drill" type="Node2D"]
+script = ExtResource("1_r1gva")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_3rrpo")
+
+[node name="DrillArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DrillArea"]
+position = Vector2(-0.5, 64)
+shape = SubResource("RectangleShape2D_mm26t")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="PodArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PodArea"]
+position = Vector2(-0.5, -45)
+shape = SubResource("RectangleShape2D_vpuxf")
+
+[node name="RobotSpawner" type="Node2D" parent="."]
+position = Vector2(0, -107)
+
+[connection signal="area_entered" from="DrillArea" to="." method="_on_drill_area_area_entered"]
+[connection signal="body_entered" from="PodArea" to="." method="_on_pod_area_body_entered"]

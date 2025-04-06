@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7okhtrd4tl8q"]
+
+[ext_resource type="Script" path="res://robots/scripts/excavator.gd" id="1_hj7ex"]
+[ext_resource type="Texture2D" uid="uid://bkl6ygh6n24qa" path="res://sprites/robots.png" id="2_ce7ka"]
+[ext_resource type="BehaviorTree" uid="uid://jomitu8nxe83" path="res://robots/behaviors/bt_excavator.tres" id="3_6i7mu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ftao6"]
+size = Vector2(20, 22)
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_te1d3"]
+
+[node name="Excavator" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_hj7ex")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(5, 0)
+rotation = 1.57085
+texture = ExtResource("2_ce7ka")
+region_enabled = true
+region_rect = Rect2(0, 32, 32, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_ftao6")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[node name="DrillPoint" type="Node2D" parent="."]
+position = Vector2(19, 0)
+
+[node name="BTPlayer" type="BTPlayer" parent="."]
+behavior_tree = ExtResource("3_6i7mu")
+blackboard_plan = SubResource("BlackboardPlan_te1d3")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

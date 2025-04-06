@@ -1,0 +1,41 @@
+[gd_resource type="BehaviorTree" load_steps=12 format=3 uid="uid://jomitu8nxe83"]
+
+[ext_resource type="Script" path="res://ai/tasks/robots/move_vertical.gd" id="1_eflgr"]
+[ext_resource type="Script" path="res://ai/tasks/robots/move_horizontal.gd" id="2_uk01m"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_0670m"]
+
+[sub_resource type="BTAction" id="BTAction_021h3"]
+script = ExtResource("1_eflgr")
+target_name = "order"
+
+[sub_resource type="BTAction" id="BTAction_ngecy"]
+script = ExtResource("2_uk01m")
+target_name = "order"
+
+[sub_resource type="BTAction" id="BTAction_3p4st"]
+script = ExtResource("1_eflgr")
+target_name = "tunnel_end"
+
+[sub_resource type="BTAction" id="BTAction_2333m"]
+script = ExtResource("2_uk01m")
+target_name = "tunnel_end"
+
+[sub_resource type="BTAction" id="BTAction_ev8nl"]
+script = ExtResource("1_eflgr")
+target_name = "order"
+
+[sub_resource type="BTAction" id="BTAction_g7xym"]
+script = ExtResource("2_uk01m")
+target_name = "drill"
+
+[sub_resource type="BTAction" id="BTAction_hkvgt"]
+script = ExtResource("1_eflgr")
+target_name = "drill"
+
+[sub_resource type="BTSequence" id="BTSequence_erexp"]
+children = [SubResource("BTAction_021h3"), SubResource("BTAction_ngecy"), SubResource("BTAction_3p4st"), SubResource("BTAction_2333m"), SubResource("BTAction_ev8nl"), SubResource("BTAction_g7xym"), SubResource("BTAction_hkvgt")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_0670m")
+root_task = SubResource("BTSequence_erexp")
